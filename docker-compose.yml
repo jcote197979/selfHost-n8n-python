@@ -37,7 +37,7 @@ services:
 
   cloudflared:
     image: cloudflare/cloudflared:latest
-    container_name: cloudflare-tunnel
+    container_name: cloudflaretunnel
     restart: unless-stopped
     command: tunnel run
     environment:
