@@ -1,13 +1,12 @@
-# Use the n8n base
-FROM docker.n8n.io/n8nio/n8n:latest
+# Use a full Debian-based Python image
+FROM python:3.11-slim
 
-# Use the existing Python environment that n8n already provides
-# We skip 'apk' and just target the path already present in the image
-USER root
-RUN /usr/bin/python3 -m pip install --no-cache-dir requests pandas numpy
+# Install dependencies
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    build-essential \
+    && pip install --no-cache-dir requests pandas numpy \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
 
-# Copy our configuration
-COPY n8n-task-runners.json /etc/n8n-task-runners.json
-
-# Switch back to node
-USER node
+# n8n expects a specific structure for runners
+WORKDIR /home/runner
