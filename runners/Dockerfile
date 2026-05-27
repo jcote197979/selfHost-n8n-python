@@ -1,5 +1,5 @@
 # 1. Start from the pristine, official n8n runner image
-FROM docker.n8n.io/n8nio/n8n-task-runners:latest
+FROM docker.n8n.io/n8nio/n8n-task-runner:latest
 
 # 2. Install your data science libraries directly into the built-in virtual environment
 RUN /opt/runners/task-runner-python/.venv/bin/pip install requests pandas numpy
