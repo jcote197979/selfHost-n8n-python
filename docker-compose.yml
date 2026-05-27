@@ -8,8 +8,8 @@ services:
     ports:
       - "5678:5678"
     environment:
-      GENERIC_TIMEZONE: "Asia/Kolkata"
-      TZ: "Asia/Kolkata"
+      GENERIC_TIMEZONE: "America/Toronto"
+      TZ: "America/Toronto"
       N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS: "true"
       N8N_RUNNERS_ENABLED: "true"
       N8N_RUNNERS_MODE: "external"
@@ -18,7 +18,6 @@ services:
       N8N_RUNNERS_BROKER_PORT: "5679"
       N8N_RUNNERS_STDLIB_ALLOW: "*"
       N8N_RUNNERS_EXTERNAL_ALLOW: "*"
-      # Use Portainer environment variables for your domain for easier management
       WEBHOOK_URL: "https://${DOMAIN}" 
     volumes:
       - n8n_data:/home/node/.n8n
@@ -33,14 +32,12 @@ services:
       N8N_RUNNERS_TASK_BROKER_URI: "http://n8n:5679"
       N8N_RUNNERS_STDLIB_ALLOW: "*"
       N8N_RUNNERS_EXTERNAL_ALLOW: "*"
-    volumes:
-      - ./config/n8n-task-runners.json:/etc/n8n-task-runners.json
     depends_on:
       - n8n
 
   cloudflared:
     image: cloudflare/cloudflared:latest
-    container_name: cloudflaretunnel
+    container_name: cloudflare-tunnel
     restart: unless-stopped
     command: tunnel run
     environment:
