@@ -4,3 +4,4 @@ RUN /usr/local/bin/node /usr/local/lib/node_modules/corepack/dist/corepack.js pn
 COPY requirements.txt /opt/runners/task-runner-python/requirements.txt
 RUN cd /opt/runners/task-runner-python && uv pip install -r requirements.txt
 USER runner
+COPY n8n-task-runners.json /etc/n8n-task-runners.json
