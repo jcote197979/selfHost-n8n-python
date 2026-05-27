@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   n8n:
-    image: docker.n8n.io/n8nio/n8n:2.4.6
+    image: docker.n8n.io/n8nio/n8n:latest
     container_name: n8n
     restart: unless-stopped
     ports:
@@ -19,6 +19,8 @@ services:
       N8N_RUNNERS_STDLIB_ALLOW: "*"
       N8N_RUNNERS_EXTERNAL_ALLOW: "*"
       WEBHOOK_URL: "https://${DOMAIN}" 
+      # 2. ADDED to fix the Cloudflare WebSocket permission error
+      N8N_HOST: "${DOMAIN}"      
     volumes:
       - n8n_data:/home/node/.n8n
 
