@@ -21,6 +21,33 @@
         "N8N_RUNNERS_STDLIB_ALLOW": "*",
         "N8N_RUNNERS_EXTERNAL_ALLOW": "*"
       }
+    },
+    {
+      "runner-type": "javascript",
+      "workdir": "/home/runner",
+      "command": "/usr/local/bin/node",
+      "args": [
+        "--disallow-code-generation-from-strings",
+        "--disable-proto=delete",
+        "/opt/runners/task-runner-javascript/src/main.js"
+      ],
+      "health-check-server-port": "5681",
+      "allowed-env": [
+        "PATH",
+        "NODE_OPTIONS",
+        "N8N_RUNNERS_LAUNCHER_LOG_LEVEL",
+        "N8N_RUNNERS_AUTO_SHUTDOWN_TIMEOUT",
+        "N8N_RUNNERS_TASK_TIMEOUT",
+        "N8N_RUNNERS_MAX_CONCURRENCY",
+        "N8N_SENTRY_DSN",
+        "N8N_VERSION",
+        "ENVIRONMENT",
+        "DEPLOYMENT_NAME"
+      ],
+      "env-overrides": {
+        "N8N_RUNNERS_STDLIB_ALLOW": "*",
+        "N8N_RUNNERS_EXTERNAL_ALLOW": "*"
+      }
     }
   ]
 }
