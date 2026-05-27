@@ -1,16 +1,13 @@
-# Use the official n8n image as the base
+# Use the n8n base
 FROM docker.n8n.io/n8nio/n8n:latest
 
-# 1. Install pip, python3, and the build tools needed for pandas
-# 2. Install your libraries
-# 3. Clean up the cache to keep the image small
+# Use the existing Python environment that n8n already provides
+# We skip 'apk' and just target the path already present in the image
 USER root
-RUN apk add --no-cache python3 py3-pip && \
-    python3 -m venv /opt/venv && \
-    /opt/venv/bin/pip install --no-cache-dir requests pandas numpy
+RUN /usr/bin/python3 -m pip install --no-cache-dir requests pandas numpy
 
-# Copy our configuration file
+# Copy our configuration
 COPY n8n-task-runners.json /etc/n8n-task-runners.json
 
-# Switch back to the node user
+# Switch back to node
 USER node
